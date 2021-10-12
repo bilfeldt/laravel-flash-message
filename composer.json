@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "bilfeldt/laravel-flash-message",
+    "description": "Flash multiple messages using Laravels default session message flashing system",
     "keywords": [
-        ":vendor_name",
+        "bilfeldt",
         "laravel",
-        ":package_slug"
+        "laravel-flash-message"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/bilfeldt/laravel-flash-message",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Anders Bilfeldt",
+            "email": "abilfeldt@gmail.com",
             "role": "Developer"
         }
     ],
@@ -30,13 +30,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Bilfeldt\\LaravelFlashMessage\\": "src",
+            "Bilfeldt\\LaravelFlashMessage\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Bilfeldt\\LaravelFlashMessage\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -49,10 +49,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Bilfeldt\\LaravelFlashMessage\\LaravelFlashMessageServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\SkeletonFacade"
+                "LaravelFlashMessage": "Bilfeldt\\LaravelFlashMessage\\LaravelFlashMessageFacade"
             }
         }
     },
