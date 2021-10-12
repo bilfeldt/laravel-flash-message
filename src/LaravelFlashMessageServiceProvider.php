@@ -2,9 +2,9 @@
 
 namespace Bilfeldt\LaravelFlashMessage;
 
+use Bilfeldt\LaravelFlashMessage\Commands\LaravelFlashMessageCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Bilfeldt\LaravelFlashMessage\Commands\LaravelFlashMessageCommand;
 
 class LaravelFlashMessageServiceProvider extends PackageServiceProvider
 {
