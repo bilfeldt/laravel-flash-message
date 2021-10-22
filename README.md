@@ -5,59 +5,45 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/bilfeldt/laravel-flash-message/Check%20&%20fix%20styling?label=code%20style)](https://github.com/bilfeldt/laravel-flash-message/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/bilfeldt/laravel-flash-message.svg?style=flat-square)](https://packagist.org/packages/bilfeldt/laravel-flash-message)
 
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
-
-1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this laravel-flash-message
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files
-3. Remove this block of text.
-4. Have fun creating your package.
-5. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-flash-message.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-flash-message)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+An opinionated zero configuration solution for flashing multiple messages with title, text, bullets and links from the backend and showing this on the frontend using Laravel existing session flashing options.
 
 ## Installation
 
-You can install the package via composer:
+Simply install the package via composer and you are ready to flash messages:
 
 ```bash
 composer require bilfeldt/laravel-flash-message
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --provider="Bilfeldt\LaravelFlashMessage\LaravelFlashMessageServiceProvider" --tag="laravel-flash-message-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-```bash
-php artisan vendor:publish --provider="Bilfeldt\LaravelFlashMessage\LaravelFlashMessageServiceProvider" --tag="laravel-flash-message-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
 ## Usage
 
+Messages can be flashed from anywhere in the codebase but often in a controller like so:
+
 ```php
-$laravel-flash-message = new Bilfeldt\LaravelFlashMessage();
-echo $laravel-flash-message->echoPhrase('Hello, Bilfeldt!');
+// Generic message
+LaravelFlashMessageFacade::message('This is a simple message intended for you')
+  ->title('Important message')
+  ->bullets('Bullet text 1', 'Bullet text 2')
+  ->link('read more', 'https://example.com')
+  ->flash();
+
+// Error message
+LaravelFlashMessageFacade::error('This is a sad message intended for you') // Possible types: info/success/warning/error
+  ->title('Bad news')
+  ->bullets('Something went wrong', 'But so did this')
+  ->links(['read more' => 'https://example.com'])
+  ->flash();
 ```
+
+The messages are then shown in a frontend view file like so:
+
+```php
+<x-flash-message::alert />
+```
+
+## Tip
+
+You might have a layout where you would always like to flash the messages above the main content or just below the title. You can simply add the `<x-flash-message.alert />` to your layout file in the place you would like the messages to show and that way you do not need to call this in multiple views.
 
 ## Testing
 
@@ -69,18 +55,9 @@ composer test
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Contributing
-
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
-
 ## Credits
 
 - [Anders Bilfeldt](https://github.com/bilfeldt)
-- [All Contributors](../../contributors)
 
 ## License
 
