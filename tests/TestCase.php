@@ -2,9 +2,8 @@
 
 namespace Bilfeldt\LaravelFlashMessage\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Bilfeldt\LaravelFlashMessage\FlashMessageServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
