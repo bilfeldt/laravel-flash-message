@@ -3,8 +3,8 @@
 namespace Bilfeldt\LaravelFlashMessage\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Support\Collection;
 
 /** This file is essentially a copy of \Illuminate\View\Middleware\ShareErrorsFromSession */
 class ShareMessagesFromSession
@@ -40,7 +40,8 @@ class ShareMessagesFromSession
         // its value with all view instances so the views can easily access messages
         // without having to bind. An empty collection is set when there aren't any messages.
         $this->view->share(
-            'messages', Collection::make($request->session()->get(config('flash-message.session_flash'), []))->values() // values() is used to remove the uuid's used for session
+            'messages',
+            Collection::make($request->session()->get(config('flash-message.session_flash'), []))->values() // values() is used to remove the uuid's used for session
         );
 
         // Putting the messages in the view for every view allows the developer to just

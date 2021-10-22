@@ -2,17 +2,16 @@
 
 namespace Bilfeldt\LaravelFlashMessage;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 
 class Message
 {
-    const LEVEL_MESSAGE = 'message';
-    const LEVEL_INFO = 'info';
-    const LEVEL_SUCCESS = 'success';
-    const LEVEL_WARNING = 'warning';
-    const LEVEL_ERROR = 'error';
+    public const LEVEL_MESSAGE = 'message';
+    public const LEVEL_INFO = 'info';
+    public const LEVEL_SUCCESS = 'success';
+    public const LEVEL_WARNING = 'warning';
+    public const LEVEL_ERROR = 'error';
 
     protected string $level;
     protected string $message;
