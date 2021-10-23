@@ -168,13 +168,4 @@ class Message
             'links' => $this->links,
         ];
     }
-
-    //======================================================================
-    // METHODS
-    //======================================================================
-
-    public function flash(): void
-    {
-        session()->flash(config('flash-message.session_flash').'.'.Str::orderedUuid(), $this);
-    }
 }

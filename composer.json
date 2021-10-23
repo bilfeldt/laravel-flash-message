@@ -30,9 +30,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Bilfeldt\\LaravelFlashMessage\\": "src",
-            "Bilfeldt\\LaravelFlashMessage\\Database\\Factories\\": "database/factories"
-        }
+            "Bilfeldt\\LaravelFlashMessage\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

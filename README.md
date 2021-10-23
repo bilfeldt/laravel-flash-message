@@ -87,18 +87,19 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        Message::warning('This is a simple message intended for you') // message/success/info/warning/error
+        $message = Message::warning('This is a simple message intended for you') // message/success/info/warning/error
             ->title('This is important')
             ->addMessage('account', 'There is 10 days left of your free trial')
-            ->link('Read more', 'https://example.com/signup')
-            ->flash(); // This will flash the message to the Laravel session
+            ->link('Read more', 'https://example.com/signup');
             
-        return redirect('/posts');
+        return redirect('/posts')->withMessage($message); // This will flash the message to the Laravel session
     }
 }
 ```
 
 Note that for this to work you will need to add the `ShareMessagesFromSession` middleware to `app/Http/Kernel.php` as described in the [installation section](#installation) above.
+
+In the situations where we need to flash a message to session without access to a redirect, like in a Laravel Livewire component, then we have added a small helper method `session_message($message)` which does the same.
 
 ### Show messages
 
