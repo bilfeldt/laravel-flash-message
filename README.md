@@ -1,44 +1,111 @@
-# Flash multiple messages using Laravels default session message flashing system
+# Flash multiple advanced messages with both text, messages and links
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/bilfeldt/laravel-flash-message.svg?style=flat-square)](https://packagist.org/packages/bilfeldt/laravel-flash-message)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/bilfeldt/laravel-flash-message/run-tests?label=tests)](https://github.com/bilfeldt/laravel-flash-message/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/bilfeldt/laravel-flash-message/Check%20&%20fix%20styling?label=code%20style)](https://github.com/bilfeldt/laravel-flash-message/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/bilfeldt/laravel-flash-message.svg?style=flat-square)](https://packagist.org/packages/bilfeldt/laravel-flash-message)
 
-An opinionated zero configuration solution for flashing multiple messages with title, text, bullets and links from the backend and showing this on the frontend using Laravel existing session flashing options.
+An opinionated solution for flashing multiple advanced messages from the backend and showing these on the frontend using customizable Tailwind CSS alerts.
 
 ## Installation
 
-Simply install the package via composer and you are ready to flash messages:
+Install the package via composer and you are ready to add messages that show these on the frontend.
 
 ```bash
 composer require bilfeldt/laravel-flash-message
 ```
 
-## Usage
-
-Messages can be flashed from anywhere in the codebase but often in a controller like so:
+**Optional:** In case you wish to use the [message flashing](https://laravel.com/docs/master/responses#redirecting-with-flashed-session-data) feature allowing messages to be made available on the next request (usefull in combination with redirects) simply add the `ShareMessagesFromSession` middleware to the `web` group defined in `$middlewareGroups` just after the `ShareErrorsFromSession`:
 
 ```php
-// Generic message
-LaravelFlashMessageFacade::message('This is a simple message intended for you')
-  ->title('Important message')
-  ->bullets('Bullet text 1', 'Bullet text 2')
-  ->link('read more', 'https://example.com')
-  ->flash();
+// app/Http/Kernel.php
 
-// Error message
-LaravelFlashMessageFacade::error('This is a sad message intended for you') // Possible types: info/success/warning/error
-  ->title('Bad news')
-  ->bullets('Something went wrong', 'But so did this')
-  ->links(['read more' => 'https://example.com'])
-  ->flash();
+/**
+ * The application's route middleware groups.
+ *
+ * @var array
+ */
+protected $middlewareGroups = [
+    'web' => [
+        \App\Http\Middleware\EncryptCookies::class,
+        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Laravel\Jetstream\Http\Middleware\AuthenticateSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \Bilfeldt\LaravelFlashMessage\Http\Middleware\ShareMessagesFromSession::class, // <------ ADDED HERE
+        \App\Http\Middleware\VerifyCsrfToken::class,
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+    ],
+    ...
 ```
 
-The messages are then shown in a frontend view file like so:
+## Usage
 
 ```php
-<x-flash-message::alert />
+<?php
+
+namespace App\Http\Controllers;
+
+use Bilfeldt\LaravelFlashMessage\Message;
+use Illuminate\Http\Request;
+
+class PostController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  Request  $request
+     */
+    public function index(Request $request)
+    {
+        $message = Message::warning('This is a simple message intended for you') // message/success/info/warning/error
+            ->title('This is important')
+            ->addMessage('account', 'There is 10 days left of your free trial')
+            ->link('Read more', 'https://example.com/signup');
+            
+        return view('posts')->withMessage($message);
+    }
+}
+```
+
+Sometimes a redirect is returned to the user instead of a view. In that case the message must be flashed to the session so that they are available on the subsequent request. This is simply done by flashing the `$message`:
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Bilfeldt\LaravelFlashMessage\Message;
+use Illuminate\Http\Request;
+
+class PostController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  Request  $request
+     */
+    public function index(Request $request)
+    {
+        Message::warning('This is a simple message intended for you') // message/success/info/warning/error
+            ->title('This is important')
+            ->addMessage('account', 'There is 10 days left of your free trial')
+            ->link('Read more', 'https://example.com/signup')
+            ->flash(); // This will flash the message to the Laravel session
+            
+        return redirect('/posts');
+    }
+}
+```
+
+Note that for this to work you will need to add the `ShareMessagesFromSession` middleware to `app/Http/Kernel.php` as described in the [installation section](#installation) above.
+
+### Show messages
+
+Once messages have been passed to the frontend these can be shown by simply using the following component in any view file:
+
+```php
+<x-flash-alert-messages />
 ```
 
 ## Tip
