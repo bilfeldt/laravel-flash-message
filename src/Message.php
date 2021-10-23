@@ -3,7 +3,6 @@
 namespace Bilfeldt\LaravelFlashMessage;
 
 use Illuminate\Support\MessageBag;
-use Illuminate\Support\Str;
 
 class Message
 {
