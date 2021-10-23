@@ -57,11 +57,11 @@
         </div>
         <div @class([
             'text-sm',
-            'text-gray-600' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_MESSAGE,
-            'text-blue-600' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_INFO,
-            'text-green-600' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_SUCCESS,
-            'text-yellow-600' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_WARNING,
-            'text-red-600' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_ERROR,
+            'text-gray-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_MESSAGE,
+            'text-blue-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_INFO,
+            'text-green-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_SUCCESS,
+            'text-yellow-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_WARNING,
+            'text-red-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_ERROR,
         ])>
             <p>{{ $text }}</p>
         </div>
