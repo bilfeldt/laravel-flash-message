@@ -6,10 +6,7 @@ use Bilfeldt\LaravelFlashMessage\View\Components\Alert;
 use Bilfeldt\LaravelFlashMessage\View\Components\AlertMessages;
 use Bilfeldt\LaravelFlashMessage\View\Components\Error;
 use Bilfeldt\LaravelFlashMessage\View\Components\Info;
-use Bilfeldt\LaravelFlashMessage\View\Components\Message;
-use Bilfeldt\LaravelFlashMessage\View\Components\Success;
 use Bilfeldt\LaravelFlashMessage\View\Components\Test;
-use Bilfeldt\LaravelFlashMessage\View\Components\Warning;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Spatie\LaravelPackageTools\Package;
@@ -17,7 +14,7 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class FlashMessageServiceProvider extends PackageServiceProvider
 {
-    const VIEW_COMPONENT_NAMESPACE = 'flash';
+    public const VIEW_COMPONENT_NAMESPACE = 'flash';
 
     public function configurePackage(Package $package): void
     {
