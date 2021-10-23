@@ -58,6 +58,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 ## Credits
 
 - [Anders Bilfeldt](https://github.com/bilfeldt)
+- [iAmine](https://tailwindcomponents.com/u/iaminos) for the [Alert blade components](https://tailwindcomponents.com/component/alerts-components)
 
 ## License
 

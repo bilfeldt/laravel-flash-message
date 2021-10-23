@@ -2,7 +2,6 @@
 
 namespace Bilfeldt\LaravelFlashMessage;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 
@@ -15,9 +14,9 @@ class Message
     const LEVEL_ERROR = 'error';
 
     protected string $level;
-    protected string $message;
+    protected string $text;
     protected string $title;
-    protected MessageBag $messageBag;
+    protected MessageBag $messages;
     protected array $links;
 
     public static function levels(): array
@@ -31,43 +30,43 @@ class Message
         ];
     }
 
-    public static function make(string $message): self
+    public static function info(string $text): self
     {
-        return new self($message);
+        return (self::make($text))->level(self::LEVEL_INFO);
     }
 
-    public function __construct(string $message)
+    public static function success(string $text): self
     {
-        $this->level = self::LEVEL_MESSAGE;
-        $this->message($message);
+        return (self::make($text))->level(self::LEVEL_SUCCESS);
+    }
+
+    public static function warning(string $text): self
+    {
+        return (self::make($text))->level(self::LEVEL_WARNING);
+    }
+
+    public static function error(string $text): self
+    {
+        return (self::make($text))->level(self::LEVEL_ERROR);
+    }
+
+    public static function make(string $text): self
+    {
+        return new self($text);
+    }
+
+    public function __construct(string $text, string $level = self::LEVEL_MESSAGE)
+    {
+        $this->level($level);
+        $this->text($text);
         $this->title = '';
         $this->links = [];
-        $this->messageBag = new MessageBag();
+        $this->messages = new MessageBag();
     }
 
     //======================================================================
     // SETTERS
     //======================================================================
-
-    public function info(): self
-    {
-        return $this->level(self::LEVEL_INFO);
-    }
-
-    public function success(): self
-    {
-        return $this->level(self::LEVEL_SUCCESS);
-    }
-
-    public function warning(): self
-    {
-        return $this->level(self::LEVEL_WARNING);
-    }
-
-    public function error(): self
-    {
-        return $this->level(self::LEVEL_ERROR);
-    }
 
     public function level(string $level): self
     {
@@ -80,9 +79,9 @@ class Message
         return $this;
     }
 
-    public function message(string $message): self
+    public function text(string $text): self
     {
-        $this->message = $message;
+        $this->text = $text;
 
         return $this;
     }
@@ -94,16 +93,22 @@ class Message
         return $this;
     }
 
-    public function errors(array $errors): self
+    public function messages(array $messages): self
     {
-        $this->messageBag = new MessageBag($errors);
+        $this->messages = new MessageBag($messages);
 
         return $this;
     }
 
-    public function addError(string $field, string ...$errors): self
+    public function addMessage(string $field, string ...$messages): self
     {
-        $this->messageBag->merge(empty($errors) ? [$field] : [$field => $errors]);
+        if (empty($messages)) {
+            $this->messages->merge([$field]);
+        } else {
+            foreach($messages as $message) {
+                $this->messages->add($field, $message);
+            }
+        }
 
         return $this;
     }
@@ -133,9 +138,9 @@ class Message
         return $this->level;
     }
 
-    public function getMessage(): string
+    public function getText(): string
     {
-        return $this->message;
+        return $this->text;
     }
 
     public function getTitle(): string
@@ -145,7 +150,7 @@ class Message
 
     public function getMessageBag(): MessageBag
     {
-        return $this->messageBag;
+        return $this->messages;
     }
 
     public function getLinks(): array
@@ -158,8 +163,8 @@ class Message
         return [
             'level' => $this->level,
             'title' => $this->title,
-            'message' => $this->message,
-            'messageBag' => $this->messageBag,
+            'message' => $this->text,
+            'messageBag' => $this->messages,
             'links' => $this->links,
         ];
     }
