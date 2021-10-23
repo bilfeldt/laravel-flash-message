@@ -105,7 +105,7 @@ class Message
         if (empty($messages)) {
             $this->messages->merge([$field]);
         } else {
-            foreach($messages as $message) {
+            foreach ($messages as $message) {
                 $this->messages->add($field, $message);
             }
         }
