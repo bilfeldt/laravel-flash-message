@@ -2,6 +2,7 @@
 
 namespace Bilfeldt\LaravelFlashMessage\Http\Middleware;
 
+use Bilfeldt\LaravelFlashMessage\ViewFlashMessageBag;
 use Closure;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Support\Collection;
@@ -41,7 +42,7 @@ class ShareMessagesFromSession
         // without having to bind. An empty collection is set when there aren't any messages.
         $this->view->share(
             'messages',
-            Collection::make($request->session()->get(config('flash-message.session_flash'), []))->values() // values() is used to remove the uuid's used for session
+            ViewFlashMessageBag::make($request->session()->get(config('flash-message.session_flash')) ?: [])
         );
 
         // Putting the messages in the view for every view allows the developer to just

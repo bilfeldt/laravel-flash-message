@@ -1,4 +1,4 @@
-@foreach($messages as $message)
+@foreach($messages->getBag($bag) as $message)
     <x-flash-alert
         :level="$message->getLevel()"
         :text="$message->getText()"

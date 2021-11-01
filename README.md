@@ -15,7 +15,7 @@ Install the package via composer and you are ready to add messages that show the
 composer require bilfeldt/laravel-flash-message
 ```
 
-**Optional:** In case you wish to use the [message flashing](https://laravel.com/docs/master/responses#redirecting-with-flashed-session-data) feature allowing messages to be made available on the next request (usefull in combination with redirects) simply add the `ShareMessagesFromSession` middleware to the `web` group defined in `$middlewareGroups` just after the `ShareErrorsFromSession`:
+**Optional:** In case you wish to use the [message flashing](https://laravel.com/docs/master/responses#redirecting-with-flashed-session-data) feature allowing messages to be made available on the next request (usefull in combination with redirects) simply add the `ShareMessagesFromSession` middleware to the `web` group defined in `app/Http/Kernel.php` just after the `ShareErrorsFromSession` middleware:
 
 ```php
 // app/Http/Kernel.php
@@ -109,6 +109,22 @@ Once messages have been passed to the frontend these can be shown by simply usin
 <x-flash-alert-messages />
 ```
 
+## Multiple message bags
+
+There might be situations where it can be usefull to have multiple "MessagebBags" (the same approach as Laravel usese for the validation messages) and in this case one can name the bag like so:
+
+```php
+return view('posts')->withMessage($message, 'bag-name');
+// or 
+return redirect('/posts')->withMessage($message, 'bag-name');
+```
+
+and when displaying the messages simply pass the bag name as well:
+
+```php
+<x-flash-alert-messages bag='bag-name' />
+```
+
 ## Tip
 
 You might have a layout where you would always like to flash the messages above the main content or just below the title. You can simply add the `<x-flash-message.alert />` to your layout file in the place you would like the messages to show and that way you do not need to call this in multiple views.
@@ -127,6 +143,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 - [Anders Bilfeldt](https://github.com/bilfeldt)
 - [iAmine](https://tailwindcomponents.com/u/iaminos) for the [Alert blade components](https://tailwindcomponents.com/component/alerts-components)
+- [Showcode.app](https://showcode.app/) used for creating repository banner
 
 ## License
 
