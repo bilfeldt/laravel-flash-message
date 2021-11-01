@@ -51,7 +51,7 @@ class FlashMessageServiceProvider extends PackageServiceProvider
 
         View::macro('withMessage', function (\Bilfeldt\LaravelFlashMessage\Message $message, string $bag = 'default'): View {
             /** @var Collection $message */
-            $messages = \Illuminate\Support\Facades\View::shared(config('flash-message.view_share'), new ViewFlashMessageBag);
+            $messages = \Illuminate\Support\Facades\View::shared(config('flash-message.view_share'), new ViewFlashMessageBag());
 
             \Illuminate\Support\Facades\View::share(config('flash-message.view_share'), $messages->push($message, $bag));
 
