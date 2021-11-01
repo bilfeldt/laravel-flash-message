@@ -36,21 +36,8 @@ class FlashMessageServiceProvider extends PackageServiceProvider
 
     public function packageBooted()
     {
-        //\Blade::component('test', Test::class, 'flash');
-        //\Blade::componentNamespace('Bilfeldt\LaravelFlashMessage\\Views\\Components', 'flash');
-
-        //$this->loadViewComponentsAs('flash', [
-        //    Error::class,
-        //]);
-
-        /*
-        $this->loadViewComponentsAs('flash', [
-            Error::class,
-        ]);
-        */
-
         View::macro('withMessage', function (\Bilfeldt\LaravelFlashMessage\Message $message, string $bag = 'default'): View {
-            /** @var Collection $message */
+            /** @var ViewFlashMessageBag $messages */
             $messages = \Illuminate\Support\Facades\View::shared(config('flash-message.view_share'), new ViewFlashMessageBag);
 
             \Illuminate\Support\Facades\View::share(config('flash-message.view_share'), $messages->push($message, $bag));
