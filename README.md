@@ -121,6 +121,12 @@ Once messages have been passed to the frontend these can be shown by simply usin
 <x-flash-alert-messages />
 ```
 
+The above will display messages from the `default` bag. Displaying messages from a specific bag is done by simply providing the name of the bag:
+
+```php
+<x-flash-alert-messages bag="demo" />
+```
+
 ## Multiple message bags
 
 There might be situations where it can be usefull to have multiple "MessagebBags" (the same approach as Laravel usese for the validation messages) and in this case one can name the bag like so:
@@ -140,6 +146,12 @@ and when displaying the messages simply pass the bag name as well:
 ## Tip
 
 You might have a layout where you would always like to flash the messages above the main content or just below the title. You can simply add the `<x-flash-message.alert />` to your layout file in the place you would like the messages to show and that way you do not need to call this in multiple views.
+
+If you then need to show specific messages at a specific location simply use a [named message bag]() for these messages and show them at the desired location
+
+## Alternatives / Supplements
+
+This package is useful when working with blade files and passing messages from the backend to the frontend during rendering. If you are looking for *toast* (popup) messages instead have a look at the awesome package [usernotnull/tall-toasts](https://github.com/usernotnull/tall-toasts) for the [TALL stack](https://tallstack.dev/).
 
 ## Testing
 
