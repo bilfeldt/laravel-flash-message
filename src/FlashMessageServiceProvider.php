@@ -2,7 +2,6 @@
 
 namespace Bilfeldt\LaravelFlashMessage;
 
-use Bilfeldt\LaravelFlashMessage\Message;
 use Bilfeldt\LaravelFlashMessage\View\Components\Alert;
 use Bilfeldt\LaravelFlashMessage\View\Components\AlertMessages;
 use Illuminate\View\Factory;
