@@ -1,5 +1,7 @@
 # Flash multiple advanced messages with both text, messages and links
 
+![bilfeldt/laravel-flash-message](/art/banner.png?raw=true)
+
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/bilfeldt/laravel-flash-message.svg?style=flat-square)](https://packagist.org/packages/bilfeldt/laravel-flash-message)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/bilfeldt/laravel-flash-message/run-tests?label=tests)](https://github.com/bilfeldt/laravel-flash-message/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/bilfeldt/laravel-flash-message/Check%20&%20fix%20styling?label=code%20style)](https://github.com/bilfeldt/laravel-flash-message/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
@@ -147,7 +149,7 @@ and when displaying the messages simply pass the bag name as well:
 
 You might have a layout where you would always like to flash the messages above the main content or just below the title. You can simply add the `<x-flash-message.alert />` to your layout file in the place you would like the messages to show and that way you do not need to call this in multiple views.
 
-If you then need to show specific messages at a specific location simply use a [named message bag]() for these messages and show them at the desired location
+If you then need to show specific messages at a specific location simply use a [named message bag](#Multiple message bags) for these messages and show them at the desired location
 
 ## Alternatives / Supplements
 
@@ -165,9 +167,10 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Credits
 
-- [Anders Bilfeldt](https://github.com/bilfeldt)
-- [iAmine](https://tailwindcomponents.com/u/iaminos) for the [Alert blade components](https://tailwindcomponents.com/component/alerts-components)
-- [Showcode.app](https://showcode.app/) used for creating repository banner
+- [Anders Bilfeldt](https://github.com/bilfeldt): Main package developer
+- [iAmine](https://tailwindcomponents.com/u/iaminos): The [Alert blade components](https://tailwindcomponents.com/component/alerts-components)
+- [Showcode.app](https://showcode.app/): Service for creating terminal mockups
+- [Beyond Code](https://banners.beyondco.de/): Banner generator
 
 ## License
 
