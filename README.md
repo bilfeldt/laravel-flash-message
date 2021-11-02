@@ -5,11 +5,11 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/bilfeldt/laravel-flash-message/Check%20&%20fix%20styling?label=code%20style)](https://github.com/bilfeldt/laravel-flash-message/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/bilfeldt/laravel-flash-message.svg?style=flat-square)](https://packagist.org/packages/bilfeldt/laravel-flash-message)
 
-An opinionated solution for flashing multiple advanced messages from the backend and showing these on the frontend using customizable Tailwind CSS alerts.
+An opinionated solution for flashing multiple advanced messages from the backend and showing these on the frontend using prebuild customizable Tailwind CSS alert blade components.
 
 ## Installation
 
-Install the package via composer and you are ready to add messages that show these on the frontend.
+Install the package via composer and you are ready to add messages and show these on the frontend.
 
 ```bash
 composer require bilfeldt/laravel-flash-message
@@ -41,6 +41,8 @@ protected $middlewareGroups = [
 
 ## Usage
 
+The most basic usage of this package is creating a message inside a controller and passing it to the view:
+
 ```php
 <?php
 
@@ -67,6 +69,8 @@ class PostController extends Controller
     }
 }
 ```
+
+### Redirects
 
 Sometimes a redirect is returned to the user instead of a view. In that case the message must be flashed to the session so that they are available on the subsequent request. This is simply done by flashing the `$message`:
 
@@ -100,6 +104,14 @@ class PostController extends Controller
 Note that for this to work you will need to add the `ShareMessagesFromSession` middleware to `app/Http/Kernel.php` as described in the [installation section](#installation) above.
 
 In the situations where we need to flash a message to session without access to a redirect, like in a Laravel Livewire component, then we have added a small helper method `session_message($message)` which does the same.
+
+### Adding message from anywhere in the code
+
+Messages can be adding bacially anywhere in the codebase using the `View` facade. Although most usecases will be adding the messages from the controller, then this feature can be really powerful for example conjunction with middlewares:
+
+```php
+\Illuminate\Support\Facades\View::withMessage($message);
+```
 
 ### Show messages
 
