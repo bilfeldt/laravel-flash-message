@@ -45,26 +45,31 @@
         </span>
     </div>
     <div class="ml-4">
-        <div @class([
-            'font-semibold text-lg',
-            'text-gray-800' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_MESSAGE,
-            'text-blue-800' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_INFO,
-            'text-green-800' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_SUCCESS,
-            'text-yellow-800' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_WARNING,
-            'text-red-800' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_ERROR,
-        ])>
-            {{ $title }}
-        </div>
-        <div @class([
-            'text-sm',
-            'text-gray-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_MESSAGE,
-            'text-blue-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_INFO,
-            'text-green-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_SUCCESS,
-            'text-yellow-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_WARNING,
-            'text-red-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_ERROR,
-        ])>
-            <p>{{ $text }}</p>
-        </div>
+        @if($title)
+            <div @class([
+                'font-semibold text-lg',
+                'text-gray-800' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_MESSAGE,
+                'text-blue-800' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_INFO,
+                'text-green-800' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_SUCCESS,
+                'text-yellow-800' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_WARNING,
+                'text-red-800' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_ERROR,
+            ])>
+                {{ $title }}
+            </div>
+        @endif
+
+        @if($text)
+            <div @class([
+                'text-sm',
+                'text-gray-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_MESSAGE,
+                'text-blue-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_INFO,
+                'text-green-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_SUCCESS,
+                'text-yellow-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_WARNING,
+                'text-red-700' => $level == \Bilfeldt\LaravelFlashMessage\Message::LEVEL_ERROR,
+            ])>
+                <p>{{ $text }}</p>
+            </div>
+        @endif
 
         @if (! empty($messages))
             <div @class([

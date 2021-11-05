@@ -5,7 +5,6 @@ namespace Bilfeldt\LaravelFlashMessage\Http\Middleware;
 use Bilfeldt\LaravelFlashMessage\ViewFlashMessageBag;
 use Closure;
 use Illuminate\Contracts\View\Factory as ViewFactory;
-use Illuminate\Support\Collection;
 
 /** This file is essentially a copy of \Illuminate\View\Middleware\ShareErrorsFromSession */
 class ShareMessagesFromSession
