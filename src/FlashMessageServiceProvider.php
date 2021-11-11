@@ -33,6 +33,7 @@ class FlashMessageServiceProvider extends PackageServiceProvider
 
     public function packageBooted()
     {
+        // This is used when adding a message from a controller: view('posts-index')->withMessage(...)
         View::macro('withMessage', function (Message $message, string $bag = 'default'): View {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
             $viewFlashMessageBag = \Illuminate\Support\Facades\View::shared(config('flash-message.view_share'), new ViewFlashMessageBag());
@@ -42,6 +43,7 @@ class FlashMessageServiceProvider extends PackageServiceProvider
             return $this;
         });
 
+        // This is used when adding a message from the View Facade: \Illuminate\Support\Facades\View::withMessage(...)
         Factory::macro('withMessage', function (Message $message, string $bag = 'default'): Factory {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
             $viewFlashMessageBag = \Illuminate\Support\Facades\View::shared(config('flash-message.view_share'), new ViewFlashMessageBag());
@@ -51,6 +53,7 @@ class FlashMessageServiceProvider extends PackageServiceProvider
             return $this;
         });
 
+        // This is used when adding messages from a controller: view('posts-index')->withMessages(...)
         View::macro('withMessages', function (array $messages, string $bag = 'default'): View {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
             $viewFlashMessageBag = \Illuminate\Support\Facades\View::shared(config('flash-message.view_share'), new ViewFlashMessageBag());
@@ -64,6 +67,7 @@ class FlashMessageServiceProvider extends PackageServiceProvider
             return $this;
         });
 
+        // This is used when adding messages from the View Facade: \Illuminate\Support\Facades\View::withMessages(...)
         Factory::macro('withMessages', function (array $messages, string $bag = 'default'): Factory {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
             $viewFlashMessageBag = \Illuminate\Support\Facades\View::shared(config('flash-message.view_share'), new ViewFlashMessageBag());

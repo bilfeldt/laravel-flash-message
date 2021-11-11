@@ -147,9 +147,15 @@ and when displaying the messages simply pass the bag name as well:
 
 ## Tip
 
-You might have a layout where you would always like to flash the messages above the main content or just below the title. You can simply add the `<x-flash-message.alert />` to your layout file in the place you would like the messages to show and that way you do not need to call this in multiple views.
+You might have a layout where you would always like to flash the messages above the main content or just below the title. You can simply add the `<x-flash-alert-messages />` to your layout file in the place you would like the messages to show and that way you do not need to call this in multiple views. In order to avoid issues with the `$messages` not being set in case the `ShareMessagesFromSession` has not been applied then it advised to show the message like so:
 
-If you then need to show specific messages at a specific location simply use a [named message bag](#Multiple message bags) for these messages and show them at the desired location
+```php
+@isset($messages)
+    <x-flash-alert-messages />
+@endif
+```
+
+If you need to show specific messages at a specific location simply use a [named message bag](#multiple-message-bags) for these messages and show them at the desired location
 
 ## Alternatives / Supplements
 
