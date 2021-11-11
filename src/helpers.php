@@ -3,12 +3,13 @@
 use Bilfeldt\LaravelFlashMessage\Message;
 use Illuminate\Support\Str;
 
-if (! function_exists('session_message')) {
+if (!function_exists('session_message')) {
     /**
      * Flash a message to the session.
      *
-     * @param  \Bilfeldt\LaravelFlashMessage\Message  $message
-     * @param  string  $bag
+     * @param \Bilfeldt\LaravelFlashMessage\Message $message
+     * @param string                                $bag
+     *
      * @return void
      */
     function session_message(Message $message, string $bag = 'default')
