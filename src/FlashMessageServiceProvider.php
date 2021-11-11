@@ -87,9 +87,11 @@ class FlashMessageServiceProvider extends PackageServiceProvider
          *
          * Note that the view already has a method 'withErrors' but that does not share them globally like this method.
          *
-         * @param  \Illuminate\Contracts\Support\MessageProvider|array|string  $provider
-         * @param  string  $key
+         * @param \Illuminate\Contracts\Support\MessageProvider|array|string $provider
+         * @param string                                                     $key
+         *
          * @return $this
+         *
          * @see https://github.com/laravel/framework/pull/39459
          */
         View::macro('withGlobalErrors', function ($provider, $key = 'default'): View {
