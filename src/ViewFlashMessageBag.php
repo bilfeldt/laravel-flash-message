@@ -21,7 +21,8 @@ class ViewFlashMessageBag implements Countable
     /**
      * Create a new instance from an associative array of message collections.
      *
-     * @param  array|array[]  $bags
+     * @param array|array[] $bags
+     *
      * @return ViewFlashMessageBag
      */
     public static function make(array $bags): ViewFlashMessageBag
@@ -38,7 +39,8 @@ class ViewFlashMessageBag implements Countable
     /**
      * Checks if a named MessageBag exists in the bags.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return bool
      */
     public function hasBag($key = 'default')
@@ -49,7 +51,8 @@ class ViewFlashMessageBag implements Countable
     /**
      * Get a MessageBag instance from the bags.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return \Illuminate\Support\Collection|\Bilfeldt\LaravelFlashMessage\Message[]
      */
     public function getBag($key)
@@ -70,8 +73,9 @@ class ViewFlashMessageBag implements Countable
     /**
      * Add a new Message collection.
      *
-     * @param  string  $key
-     * @param  \Illuminate\Support\Collection|\Bilfeldt\LaravelFlashMessage\Message[]  $messages
+     * @param string                                                                 $key
+     * @param \Illuminate\Support\Collection|\Bilfeldt\LaravelFlashMessage\Message[] $messages
+     *
      * @return \Bilfeldt\LaravelFlashMessage\ViewFlashMessageBag
      */
     public function put($key, \Illuminate\Support\Collection $messages)
@@ -84,8 +88,9 @@ class ViewFlashMessageBag implements Countable
     /**
      * Add a new Message collection.
      *
-     * @param  \Bilfeldt\LaravelFlashMessage\Message  $message
-     * @param  string  $key
+     * @param \Bilfeldt\LaravelFlashMessage\Message $message
+     * @param string                                $key
+     *
      * @return \Bilfeldt\LaravelFlashMessage\ViewFlashMessageBag
      */
     public function push(Message $message, string $key = 'default')
@@ -108,8 +113,9 @@ class ViewFlashMessageBag implements Countable
     /**
      * Dynamically call methods on the default bag.
      *
-     * @param  string  $method
-     * @param  array  $parameters
+     * @param string $method
+     * @param array  $parameters
+     *
      * @return mixed
      */
     public function __call($method, $parameters)
@@ -120,7 +126,8 @@ class ViewFlashMessageBag implements Countable
     /**
      * Dynamically access a view message bag.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return \Illuminate\Support\Collection|\Bilfeldt\LaravelFlashMessage\Message[]
      */
     public function __get($key)
@@ -131,8 +138,9 @@ class ViewFlashMessageBag implements Countable
     /**
      * Dynamically set a view message bag.
      *
-     * @param  string  $key
-     * @param  \Illuminate\Support\Collection|\Bilfeldt\LaravelFlashMessage\Message[]  $value
+     * @param string                                                                 $key
+     * @param \Illuminate\Support\Collection|\Bilfeldt\LaravelFlashMessage\Message[] $value
+     *
      * @return void
      */
     public function __set($key, $value)
