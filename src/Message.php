@@ -69,7 +69,7 @@ class Message
 
     public function level(string $level): self
     {
-        if (! in_array($level, self::levels())) {
+        if (!in_array($level, self::levels())) {
             throw new \DomainException("Invalid message level: $level");
         }
 
@@ -160,11 +160,11 @@ class Message
     public function toArray(): array
     {
         return [
-            'level' => $this->level,
-            'title' => $this->title,
-            'message' => $this->text,
+            'level'      => $this->level,
+            'title'      => $this->title,
+            'message'    => $this->text,
             'messageBag' => $this->messages,
-            'links' => $this->links,
+            'links'      => $this->links,
         ];
     }
 }
