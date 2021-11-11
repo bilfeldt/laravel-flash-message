@@ -3,7 +3,7 @@
 use Bilfeldt\LaravelFlashMessage\Message;
 use Illuminate\Support\Str;
 
-if (! function_exists('session_message')) {
+if (!function_exists('session_message')) {
     /**
      * Flash a message to the session.
      *
