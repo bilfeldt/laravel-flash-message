@@ -4,7 +4,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/bilfeldt/laravel-flash-message.svg?style=flat-square)](https://packagist.org/packages/bilfeldt/laravel-flash-message)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/bilfeldt/laravel-flash-message/run-tests?label=tests)](https://github.com/bilfeldt/laravel-flash-message/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/bilfeldt/laravel-flash-message/Check%20&%20fix%20styling?label=code%20style)](https://github.com/bilfeldt/laravel-flash-message/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![StyleCI Code Style Status](https://github.styleci.io/repos/416473017/shield)](https://github.styleci.io/repos/416473017/shield)
 [![Total Downloads](https://img.shields.io/packagist/dt/bilfeldt/laravel-flash-message.svg?style=flat-square)](https://packagist.org/packages/bilfeldt/laravel-flash-message)
 
 An opinionated solution for flashing multiple advanced messages from the backend and showing these on the frontend using prebuild customizable Tailwind CSS alert blade components.
