@@ -21,7 +21,7 @@
         "illuminate/contracts": "^8.51 || ^9.0"
     },
     "require-dev": {
-        "nunomaduro/collision": "^5.3",
+        "nunomaduro/collision": "^5.3 || ^6.0",
         "orchestra/testbench": "^6.15 || ^7.0",
         "pestphp/pest": "^1.18",
         "pestphp/pest-plugin-laravel": "^1.1",
