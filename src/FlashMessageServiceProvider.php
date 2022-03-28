@@ -4,6 +4,7 @@ namespace Bilfeldt\LaravelFlashMessage;
 
 use Bilfeldt\LaravelFlashMessage\View\Components\Alert;
 use Bilfeldt\LaravelFlashMessage\View\Components\AlertMessages;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 use Spatie\LaravelPackageTools\Package;
@@ -77,6 +78,23 @@ class FlashMessageServiceProvider extends PackageServiceProvider
                 $viewFlashMessageBag->push($message, $bag);
             }
             \Illuminate\Support\Facades\View::share(config('flash-message.view_share'), $viewFlashMessageBag);
+
+            return $this;
+        });
+
+        // This is used to add a message from a controller when returning a redirect: redirect()->withMessage($message)
+        RedirectResponse::macro('withMessage', function (Message $message, string $bag = 'default'): RedirectResponse {
+            session_message($message, $bag);
+
+            return $this;
+        });
+
+        // This is used to add messages from a controller when returning a redirect: redirect()->withMessage([$message1, $message2])
+        RedirectResponse::macro('withMessages', function (array $messages, string $bag = 'default'): RedirectResponse {
+            /** @var \Bilfeldt\LaravelFlashMessage\Message $message */
+            foreach ($messages as $message) {
+                session_message($message, $bag);
+            }
 
             return $this;
         });
