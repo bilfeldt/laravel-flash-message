@@ -24,6 +24,13 @@ class Alert extends Component
 
     public function render()
     {
-        return view('flash-message::components.alert');
+        return match ($this->level) {
+            Message::LEVEL_MESSAGE => view('flash-message::components.alert-message'),
+            Message::LEVEL_INFO    => view('flash-message::components.alert-info'),
+            Message::LEVEL_SUCCESS => view('flash-message::components.alert-success'),
+            Message::LEVEL_WARNING => view('flash-message::components.alert-warning'),
+            Message::LEVEL_ERROR   => view('flash-message::components.alert-error'),
+            default                => view('flash-message::components.alert'),
+        };
     }
 }
