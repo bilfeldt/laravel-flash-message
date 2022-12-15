@@ -65,7 +65,7 @@ class PostController extends Controller
         $message = Message::warning('This is a simple message intended for you') // message/success/info/warning/error
             ->title('This is important')
             ->addMessage('account', 'There is 10 days left of your free trial')
-            ->link('Read more', 'https://example.com/signup');
+            ->addLink('Read more', 'https://example.com/signup');
             
         return view('posts')->withMessage($message);
     }
@@ -96,7 +96,7 @@ class PostController extends Controller
         $message = Message::warning('This is a simple message intended for you') // message/success/info/warning/error
             ->title('This is important')
             ->addMessage('account', 'There is 10 days left of your free trial')
-            ->link('Read more', 'https://example.com/signup');
+            ->addLink('Read more', 'https://example.com/signup');
             
         return redirect('/posts')->withMessage($message); // This will flash the message to the Laravel session
     }
