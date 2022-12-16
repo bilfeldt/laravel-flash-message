@@ -6,13 +6,13 @@
     </div>
     <div class="ml-4">
         @if($title)
-            <div class="font-semibold text-lg leading-0 text-red-700">
+            <div class="font-semibold text-lg leading-0 text-grey-800">
                 {{ $title }}
             </div>
         @endif
 
         @if($text)
-            <div class="text-sm text-red-600">
+            <div class="text-sm text-grey-700">
                 <p>{{ $text }}</p>
             </div>
         @endif
@@ -20,7 +20,7 @@
         {{ $slot ?? '' }}
 
         @if (! empty($messages))
-            <div class="mb-2 text-sm text-red-600">
+            <div class="mb-2 text-sm text-grey-700">
                 <ul role="list" class="list-disc pl-5 space-y-1">
                     @foreach($messages as $message)
                         <li>
@@ -35,7 +35,7 @@
             <div class="-mx-2 flex mt-4">
                 @foreach($links as $text => $link)
                     <a href="{{ $link }}"
-                        class="px-2 py-1.5 rounded-md text-sm font-medium focus:outline-none focus:ring-1 mr-3 border border border-red-400 text-red-700 hover:bg-red-100/50 focus:ring-offset-red-50 focus:ring-red-500">
+                        class="px-2 py-1.5 rounded-md text-sm font-medium focus:outline-none focus:ring-1 mr-3 border border border-red-400 text-grey-700 hover:bg-red-100/50 focus:ring-offset-red-50 focus:ring-red-500">
                         {{ $text }}
                     </a>
                 @endforeach
