@@ -17,7 +17,7 @@
             </div>
         @endif
 
-        {{ $slot }}
+        {{ $slot ?? '' }}
 
         @if (! empty($messages))
             <div class="mb-2 text-sm text-green-600">
