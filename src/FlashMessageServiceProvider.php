@@ -10,6 +10,7 @@ use Bilfeldt\LaravelFlashMessage\View\Components\AlertSuccess;
 use Bilfeldt\LaravelFlashMessage\View\Components\AlertWarning;
 use Bilfeldt\LaravelFlashMessage\View\Components\Messages;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 use Spatie\LaravelPackageTools\Package;
@@ -29,21 +30,25 @@ class FlashMessageServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-flash-message')
             ->hasConfigFile()
-            ->hasViews() // required for the view component blade files to be registered
-            ->hasViewComponents(
-                self::VIEW_COMPONENT_NAMESPACE,
-                Messages::class,
-                Alert::class,
-                AlertError::class,
-                AlertInfo::class,
-                AlertMessage::class,
-                AlertSuccess::class,
-                AlertWarning::class
-            );
+            ->hasViews(); // required for the view component blade files to be registered
+            // The package does not allow for namespaces (`<x-namespace:component />`) but only prefixes (`<x-prefix-component />`
+            // so we register those manually using `componentNamespace()`
+            //->hasViewComponents(
+            //    self::VIEW_COMPONENT_NAMESPACE,
+            //    Messages::class,
+            //    Alert::class,
+            //    AlertError::class,
+            //    AlertInfo::class,
+            //    AlertMessage::class,
+            //    AlertSuccess::class,
+            //    AlertWarning::class
+            //);
     }
 
     public function packageBooted()
     {
+        Blade::componentNamespace('Bilfeldt\\LaravelFlashMessage\\View\\Components', self::VIEW_COMPONENT_NAMESPACE);
+
         // This is used when adding a message from a controller: view('posts-index')->withMessage(...)
         View::macro('withMessage', function (Message $message, string $bag = 'default'): View {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
