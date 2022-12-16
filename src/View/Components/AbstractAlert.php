@@ -11,7 +11,7 @@ abstract class AbstractAlert extends Component
     public array $messages;
     public array $links;
 
-    public function __construct(string $text, string $title = '', array $messages = [], array $links = [])
+    public function __construct(string $text = '', string $title = '', array $messages = [], array $links = [])
     {
         $this->text = $text;
         $this->title = $title;
