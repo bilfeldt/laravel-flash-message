@@ -1,4 +1,9 @@
-php:
-  preset: laravel
-  disabled:
-    - phpdoc_summary
+preset: laravel
+tab-width: 4
+finder:
+  exclude:
+    - "tests"
+  name:
+    - "*.php"
+  not-name:
+    - "*Stub.php"
