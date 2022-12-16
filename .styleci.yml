@@ -2,9 +2,3 @@ php:
   preset: laravel
   disabled:
     - phpdoc_summary
-  finder:
-    not-name:
-      - index.php
-      - server.php
-js: true
-css: true
