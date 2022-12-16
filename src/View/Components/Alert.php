@@ -36,7 +36,7 @@ class Alert extends Component
             case Message::LEVEL_ERROR:
                 return view('flash-message::components.alert-error');
             default:
-                throw new \InvalidArgumentException('Invalid alert level: ' . $this->level);
+                throw new \InvalidArgumentException('Invalid alert level: '.$this->level);
         }
     }
 }
