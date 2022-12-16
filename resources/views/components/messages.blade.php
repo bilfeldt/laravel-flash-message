@@ -1,5 +1,5 @@
 @foreach($messages->getBag($bag) as $message)
-    <x-flash-alert
+    <x-flash::alert
         :level="$message->getLevel()"
         :text="$message->getText()"
         :title="$message->getTitle()"

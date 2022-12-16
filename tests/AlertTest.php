@@ -36,7 +36,7 @@ class AlertTest extends \Bilfeldt\LaravelFlashMessage\Tests\TestCase
      */
     public function test_can_render_message(string $level): void
     {
-        $view = $this->blade('<x-flash-alert :level="$level" :text="$text" />', [
+        $view = $this->blade('<x-flash::alert :level="$level" :text="$text" />', [
             'level' => $level,
             'text' => 'Example text',
         ]);

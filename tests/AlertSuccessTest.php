@@ -73,7 +73,7 @@ class AlertSuccessTest extends \Bilfeldt\LaravelFlashMessage\Tests\TestCase
     public function test_can_render_with_only_text(): void
     {
         $view = $this->blade(
-            '<x-flash-alert-success :text="$text" />',
+            '<x-flash::alert-success :text="$text" />',
             ['text' => 'Example text']
         );
 
@@ -84,7 +84,7 @@ class AlertSuccessTest extends \Bilfeldt\LaravelFlashMessage\Tests\TestCase
 
     public function test_can_render_with_title(): void
     {
-        $view = $this->blade('<x-flash-alert-success :text="$text" :title="$title" />', [
+        $view = $this->blade('<x-flash::alert-success :text="$text" :title="$title" />', [
             'text' => 'Example text',
             'title' => 'Example Title',
         ]);
@@ -97,7 +97,7 @@ class AlertSuccessTest extends \Bilfeldt\LaravelFlashMessage\Tests\TestCase
 
     public function test_can_render_with_messages(): void
     {
-        $view = $this->blade('<x-flash-alert-success :text="$text" :messages="$messages" />', [
+        $view = $this->blade('<x-flash::alert-success :text="$text" :messages="$messages" />', [
             'text' => 'Example text',
             'messages' => [
                 'field_1' => 'Example message 1',
@@ -114,7 +114,7 @@ class AlertSuccessTest extends \Bilfeldt\LaravelFlashMessage\Tests\TestCase
 
     public function test_can_render_with_links(): void
     {
-        $view = $this->blade('<x-flash-alert-success :text="$text" :links="$links" />', [
+        $view = $this->blade('<x-flash::alert-success :text="$text" :links="$links" />', [
             'text' => 'Example text',
             'links' => [
                 'Link 1' => 'https://example.com/test1',
