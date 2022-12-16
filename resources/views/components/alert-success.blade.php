@@ -17,6 +17,8 @@
             </div>
         @endif
 
+        {{ $slot ?? '' }}
+
         @if (! empty($messages))
             <div class="mb-2 text-sm text-green-600">
                 <ul role="list" class="list-disc pl-5 space-y-1">
