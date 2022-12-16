@@ -120,7 +120,7 @@ Messages can be adding bacially anywhere in the codebase using the `View` facade
 Once messages have been passed to the frontend these can be shown by simply using the following component in any view file:
 
 ```php
-<x-flash-alert-messages />
+<x-flash-messages />
 ```
 
 The above will display messages from the `default` bag - see below for details when using multiple bags.
@@ -138,16 +138,16 @@ return redirect('/posts')->withMessage($message, 'bag-name');
 and when displaying the messages simply pass the bag name as well:
 
 ```php
-<x-flash-alert-messages bag='bag-name' />
+<x-flash-messages bag='bag-name' />
 ```
 
 ## Tip
 
-You might have a layout where you would always like to flash the messages above the main content or just below the title. You can simply add the `<x-flash-alert-messages />` to your layout file in the place you would like the messages to show and that way you do not need to call this in multiple views. In order to avoid issues with the `$messages` not being set in case the `ShareMessagesFromSession` has not been applied then it advised to show the message like so:
+You might have a layout where you would always like to flash the messages above the main content or just below the title. You can simply add the `<x-flash-messages />` to your layout file in the place you would like the messages to show and that way you do not need to call this in multiple views. In order to avoid issues with the `$messages` not being set in case the `ShareMessagesFromSession` has not been applied then it advised to show the message like so:
 
 ```php
 @isset($messages)
-    <x-flash-alert-messages />
+    <x-flash-messages />
 @endif
 ```
 
