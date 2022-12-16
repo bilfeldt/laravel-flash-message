@@ -17,7 +17,9 @@ Install the package via composer and you are ready to add messages and show thes
 composer require bilfeldt/laravel-flash-message
 ```
 
-**Optional:** In case you wish to use the [message flashing](https://laravel.com/docs/master/responses#redirecting-with-flashed-session-data) feature allowing messages to be made available on the next request (usefull in combination with redirects) simply add the `ShareMessagesFromSession` middleware to the `web` group defined in `app/Http/Kernel.php` just after the `ShareErrorsFromSession` middleware:
+You are now ready to use the blade components to show the messages on the frontend.
+
+**Optional:** In case you wish to use the [message flashing](https://laravel.com/docs/master/responses#redirecting-with-flashed-session-data) feature allowing messages to be made available on the next request (useful in combination with redirects) simply add the `ShareMessagesFromSession` middleware to the `web` group defined in `app/Http/Kernel.php` just after the `ShareErrorsFromSession` middleware:
 
 ```php
 // app/Http/Kernel.php
@@ -42,6 +44,34 @@ protected $middlewareGroups = [
 ```
 
 ## Usage
+
+### Alert blade components
+
+Simple usage of the alert blade components (`message`, `info`, `success`, `warning`, `error`):
+
+```blade:
+
+```blade
+<x-flash::info
+    :title="__('Information')"
+    :text="__('This is a message which is relevant for you')"
+    :messages="[__('Bullet 1'), __('Bullet 2')]"
+    :links="[__('Read more') => 'https://example.com', __('Contact us') => 'https://example.com/contact']"
+/>
+```
+
+### Validation errors
+
+Validation errors are made available as `$errors` by default in Laravel and it is possilbe to render these easily using:
+
+```blade
+<x-flash::error
+    :title="__('Validation errors')"
+    :text="__('Please correct the following errors:')"
+/>
+```
+
+### Passing notifications from the backend
 
 The most basic usage of this package is creating a message inside a controller and passing it to the view:
 
@@ -115,17 +145,7 @@ Messages can be adding bacially anywhere in the codebase using the `View` facade
 \Illuminate\Support\Facades\View::withMessage($message);
 ```
 
-### Show messages
-
-Once messages have been passed to the frontend these can be shown by simply using the following component in any view file:
-
-```php
-<x-flash::messages />
-```
-
-The above will display messages from the `default` bag - see below for details when using multiple bags.
-
-## Multiple message bags
+### Multiple message bags
 
 There might be situations where it can be usefull to have multiple "MessageBags" (the same approach as Laravel usese for the validation messages) and in this case one can name the bag like so:
 
