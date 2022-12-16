@@ -14,7 +14,7 @@ class Errors extends Component
         public ?array $messages = null,
         public array $links = [],
         public string $bag = 'default'
-    ){
+    ) {
         //
     }
 
