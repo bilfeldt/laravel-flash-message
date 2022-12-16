@@ -1,4 +1,4 @@
-preset: laravel
+preset: recommended
 tab-width: 4
 finder:
   exclude:
