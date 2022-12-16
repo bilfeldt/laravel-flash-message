@@ -13,7 +13,7 @@ class Alert extends Component
     public array $messages;
     public array $links;
 
-    public function __construct(string $text, string $title = '', array $messages = [], array $links = [], string $level = Message::LEVEL_MESSAGE)
+    public function __construct(string $text = '', string $title = '', array $messages = [], array $links = [], string $level = Message::LEVEL_MESSAGE)
     {
         $this->level = $level;
         $this->text = $text;
