@@ -3,7 +3,12 @@
 namespace Bilfeldt\LaravelFlashMessage;
 
 use Bilfeldt\LaravelFlashMessage\View\Components\Alert;
+use Bilfeldt\LaravelFlashMessage\View\Components\AlertError;
+use Bilfeldt\LaravelFlashMessage\View\Components\AlertInfo;
+use Bilfeldt\LaravelFlashMessage\View\Components\AlertMessage;
 use Bilfeldt\LaravelFlashMessage\View\Components\AlertMessages;
+use Bilfeldt\LaravelFlashMessage\View\Components\AlertSuccess;
+use Bilfeldt\LaravelFlashMessage\View\Components\AlertWarning;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
@@ -27,8 +32,13 @@ class FlashMessageServiceProvider extends PackageServiceProvider
             ->hasViews() // required for the view component blade files to be registered
             ->hasViewComponents(
                 self::VIEW_COMPONENT_NAMESPACE,
+                AlertMessages::class,
                 Alert::class,
-                AlertMessages::class
+                AlertError::class,
+                AlertInfo::class,
+                AlertMessage::class,
+                AlertSuccess::class,
+                AlertWarning::class
             );
     }
 
