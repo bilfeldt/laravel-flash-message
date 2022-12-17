@@ -2,7 +2,6 @@
 
 namespace Bilfeldt\LaravelFlashMessage\View\Components;
 
-use Illuminate\Support\MessageBag;
 use Illuminate\View\Component;
 
 class Errors extends Component
