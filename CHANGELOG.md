@@ -2,7 +2,7 @@
 
 All notable changes to `laravel-flash-message` will be documented in this file.
 
-## 1.0.0 - 202X-XX-XX
+## 1.0.0 - 2022-12-18
 
 - initial release
 
