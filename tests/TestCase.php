@@ -14,6 +14,7 @@ class TestCase extends Orchestra
     {
         return [
             FlashMessageServiceProvider::class,
+            FlashMessageTestServiceProvider::class,
         ];
     }
 

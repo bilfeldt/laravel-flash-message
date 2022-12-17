@@ -2,15 +2,9 @@
 
 namespace Bilfeldt\LaravelFlashMessage;
 
-use Bilfeldt\LaravelFlashMessage\View\Components\Alert;
-use Bilfeldt\LaravelFlashMessage\View\Components\AlertError;
-use Bilfeldt\LaravelFlashMessage\View\Components\AlertInfo;
-use Bilfeldt\LaravelFlashMessage\View\Components\AlertMessage;
-use Bilfeldt\LaravelFlashMessage\View\Components\AlertSuccess;
-use Bilfeldt\LaravelFlashMessage\View\Components\AlertWarning;
-use Bilfeldt\LaravelFlashMessage\View\Components\Messages;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\ViewErrorBag;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 use Spatie\LaravelPackageTools\Package;
@@ -93,6 +87,33 @@ class FlashMessageServiceProvider extends PackageServiceProvider
                 $viewFlashMessageBag->push($message, $bag);
             }
             \Illuminate\Support\Facades\View::share(config('flash-message.view_share'), $viewFlashMessageBag);
+
+            return $this;
+        });
+
+        /**
+         * Flash a container of errors to the global errors bag.
+         *
+         * Note that the view already has a method 'withErrors' but that does not share them globally like this method.
+         *
+         * @param \Illuminate\Contracts\Support\MessageProvider|array|string $provider
+         * @param string                                                     $key
+         *
+         * @return $this
+         *
+         * @see https://github.com/laravel/framework/pull/39459
+         */
+        View::macro('addErrors', function ($provider, $key = 'default'): View {
+            /** @var ViewErrorBag $viewErrorBag */
+            $viewErrorBag = \Illuminate\Support\Facades\View::shared('errors', new ViewErrorBag());
+
+            if ($viewErrorBag->hasBag($key)) {
+                $viewErrorBag->getBag($key)->merge($provider);
+            } else {
+                $viewErrorBag->put($key, $this->formatErrors($provider));
+            }
+
+            \Illuminate\Support\Facades\View::share('errors', $viewErrorBag);
 
             return $this;
         });
