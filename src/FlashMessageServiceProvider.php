@@ -103,8 +103,8 @@ class FlashMessageServiceProvider extends PackageServiceProvider
          *
          * @see https://github.com/laravel/framework/pull/39459
          */
-        View::macro('withGlobalErrors', function ($provider, $key = 'default'): View {
-            /** @var ViewFlashMessageBag $viewFlashMessageBag */
+        View::macro('addErrors', function ($provider, $key = 'default'): View {
+            /** @var ViewErrorBag $viewErrorBag */
             $viewErrorBag = \Illuminate\Support\Facades\View::shared('errors', new ViewErrorBag());
 
             if ($viewErrorBag->hasBag($key)) {
@@ -113,16 +113,11 @@ class FlashMessageServiceProvider extends PackageServiceProvider
                 $viewErrorBag->put($key, $this->formatErrors($provider));
             }
 
-            \Illuminate\Support\Facades\View::share('errors', $viewFlashMessageBag);
+            \Illuminate\Support\Facades\View::share('errors', $viewErrorBag);
 
             return $this;
         });
 
-        // This will ensure that the $message variable is always available even if the ShareMessagesFromSession middleware is not applied.
-        //\Illuminate\Support\Facades\View::share(
-        //    config('flash-message.view_share'),
-        //    \Illuminate\Support\Facades\View::shared(config('flash-message.view_share'), new ViewFlashMessageBag())
-        //);
         // This is used to add a message from a controller when returning a redirect: redirect()->withMessage($message)
         RedirectResponse::macro('withMessage', function (Message $message, string $bag = 'default'): RedirectResponse {
             session_message($message, $bag);
