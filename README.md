@@ -4,7 +4,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/bilfeldt/laravel-flash-message.svg?style=flat-square)](https://packagist.org/packages/bilfeldt/laravel-flash-message)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/bilfeldt/laravel-flash-message/run-tests?label=tests)](https://github.com/bilfeldt/laravel-flash-message/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/bilfeldt/laravel-flash-message/Check%20&%20fix%20styling?label=code%20style)](https://github.com/bilfeldt/laravel-flash-message/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![StyleCI Code Style Status](https://github.styleci.io/repos/416473017/shield)](https://github.styleci.io/repos/416473017/shield)
 [![Total Downloads](https://img.shields.io/packagist/dt/bilfeldt/laravel-flash-message.svg?style=flat-square)](https://packagist.org/packages/bilfeldt/laravel-flash-message)
 
 An opinionated solution for flashing multiple advanced messages from the backend and showing these on the frontend using prebuild customizable Tailwind CSS alert blade components.
@@ -17,7 +17,9 @@ Install the package via composer and you are ready to add messages and show thes
 composer require bilfeldt/laravel-flash-message
 ```
 
-**Optional:** In case you wish to use the [message flashing](https://laravel.com/docs/master/responses#redirecting-with-flashed-session-data) feature allowing messages to be made available on the next request (usefull in combination with redirects) simply add the `ShareMessagesFromSession` middleware to the `web` group defined in `app/Http/Kernel.php` just after the `ShareErrorsFromSession` middleware:
+You are now ready to use the blade components to show the messages on the frontend.
+
+**Optional:** In case you wish to use the [message flashing](https://laravel.com/docs/master/responses#redirecting-with-flashed-session-data) feature allowing messages to be made available on the next request (useful in combination with redirects) simply add the `ShareMessagesFromSession` middleware to the `web` group defined in `app/Http/Kernel.php` just after the `ShareErrorsFromSession` middleware:
 
 ```php
 // app/Http/Kernel.php
@@ -43,6 +45,34 @@ protected $middlewareGroups = [
 
 ## Usage
 
+### Alert blade components
+
+Simple usage of the alert blade components (`message`, `info`, `success`, `warning`, `error`):
+
+```blade:
+
+```blade
+<x-flash::info
+    :title="__('Information')"
+    :text="__('This is a message which is relevant for you')"
+    :messages="[__('Bullet 1'), __('Bullet 2')]"
+    :links="[__('Read more') => 'https://example.com', __('Contact us') => 'https://example.com/contact']"
+/>
+```
+
+### Validation errors
+
+Validation errors are made available as `$errors` by default in Laravel and it is possilbe to render these easily using:
+
+```blade
+<x-flash::error
+    :title="__('Validation errors')"
+    :text="__('Please correct the following errors:')"
+/>
+```
+
+### Passing notifications from the backend
+
 The most basic usage of this package is creating a message inside a controller and passing it to the view:
 
 ```php
@@ -65,7 +95,7 @@ class PostController extends Controller
         $message = Message::warning('This is a simple message intended for you') // message/success/info/warning/error
             ->title('This is important')
             ->addMessage('account', 'There is 10 days left of your free trial')
-            ->link('Read more', 'https://example.com/signup');
+            ->addLink('Read more', 'https://example.com/signup');
             
         return view('posts')->withMessage($message);
     }
@@ -96,7 +126,7 @@ class PostController extends Controller
         $message = Message::warning('This is a simple message intended for you') // message/success/info/warning/error
             ->title('This is important')
             ->addMessage('account', 'There is 10 days left of your free trial')
-            ->link('Read more', 'https://example.com/signup');
+            ->addLink('Read more', 'https://example.com/signup');
             
         return redirect('/posts')->withMessage($message); // This will flash the message to the Laravel session
     }
@@ -115,23 +145,9 @@ Messages can be adding bacially anywhere in the codebase using the `View` facade
 \Illuminate\Support\Facades\View::withMessage($message);
 ```
 
-### Show messages
+### Multiple message bags
 
-Once messages have been passed to the frontend these can be shown by simply using the following component in any view file:
-
-```php
-<x-flash-alert-messages />
-```
-
-The above will display messages from the `default` bag. Displaying messages from a specific bag is done by simply providing the name of the bag:
-
-```php
-<x-flash-alert-messages bag="demo" />
-```
-
-## Multiple message bags
-
-There might be situations where it can be usefull to have multiple "MessagebBags" (the same approach as Laravel usese for the validation messages) and in this case one can name the bag like so:
+There might be situations where it can be usefull to have multiple "MessageBags" (the same approach as Laravel usese for the validation messages) and in this case one can name the bag like so:
 
 ```php
 return view('posts')->withMessage($message, 'bag-name');
@@ -142,16 +158,16 @@ return redirect('/posts')->withMessage($message, 'bag-name');
 and when displaying the messages simply pass the bag name as well:
 
 ```php
-<x-flash-alert-messages bag='bag-name' />
+<x-flash::messages bag='bag-name' />
 ```
 
 ## Tip
 
-You might have a layout where you would always like to flash the messages above the main content or just below the title. You can simply add the `<x-flash-alert-messages />` to your layout file in the place you would like the messages to show and that way you do not need to call this in multiple views. In order to avoid issues with the `$messages` not being set in case the `ShareMessagesFromSession` has not been applied then it advised to show the message like so:
+You might have a layout where you would always like to flash the messages above the main content or just below the title. You can simply add the `<x-flash::messages />` to your layout file in the place you would like the messages to show and that way you do not need to call this in multiple views. In order to avoid issues with the `$messages` not being set in case the `ShareMessagesFromSession` has not been applied then it advised to show the message like so:
 
 ```php
 @isset($messages)
-    <x-flash-alert-messages />
+    <x-flash::messages />
 @endif
 ```
 
@@ -159,7 +175,9 @@ If you need to show specific messages at a specific location simply use a [named
 
 ## Alternatives / Supplements
 
-This package is useful when working with blade files and passing messages from the backend to the frontend during rendering. If you are looking for *toast* (popup) messages instead have a look at the awesome package [usernotnull/tall-toasts](https://github.com/usernotnull/tall-toasts) for the [TALL stack](https://tallstack.dev/).
+This package is useful when working with blade files and passing messages from the backend to the frontend during rendering. If you are looking for *toast* (popup) messages instead have a look at these awesome packages:
+- [usernotnull/tall-toasts](https://github.com/usernotnull/tall-toasts) for the [TALL stack](https://tallstack.dev/)
+- [https://php-flasher.github.io/](https://php-flasher.github.io/)
 
 ## Testing
 

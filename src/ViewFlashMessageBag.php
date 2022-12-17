@@ -25,7 +25,7 @@ class ViewFlashMessageBag implements Countable
      *
      * @return ViewFlashMessageBag
      */
-    public static function make(array $bags): ViewFlashMessageBag
+    public static function make(array $bags): self
     {
         $viewFlashMessageBag = new self();
 
@@ -43,7 +43,7 @@ class ViewFlashMessageBag implements Countable
      *
      * @return bool
      */
-    public function hasBag($key = 'default')
+    public function hasBag($key = 'default'): bool
     {
         return isset($this->bags[$key]);
     }
@@ -78,7 +78,7 @@ class ViewFlashMessageBag implements Countable
      *
      * @return \Bilfeldt\LaravelFlashMessage\ViewFlashMessageBag
      */
-    public function put($key, \Illuminate\Support\Collection $messages)
+    public function put($key, \Illuminate\Support\Collection $messages): self
     {
         $this->bags[$key] = $messages;
 
@@ -93,7 +93,7 @@ class ViewFlashMessageBag implements Countable
      *
      * @return \Bilfeldt\LaravelFlashMessage\ViewFlashMessageBag
      */
-    public function push(Message $message, string $key = 'default')
+    public function push(Message $message, string $key = 'default'): self
     {
         $this->bags[$key] = $this->getBag($key)->push($message);
 
@@ -105,7 +105,7 @@ class ViewFlashMessageBag implements Countable
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return $this->getBag('default')->count();
     }
