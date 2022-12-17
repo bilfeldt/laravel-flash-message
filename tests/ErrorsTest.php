@@ -42,4 +42,30 @@ class ErrorsTest extends TestCase
             ->assertSee('Example message 3');
     }
 
+    public function test_no_errors_renders_nothing()
+    {
+        View::share('errors', (new ViewErrorBag)->put('default', new MessageBag([])));
+
+        $view = $this->blade('<x-flash::errors />');
+
+        $view->assertDontSee('role="alert"', false);
+    }
+
+    public function test_error_formatting()
+    {
+        View::share('errors', (new ViewErrorBag)->put('default', new MessageBag([
+            'field_1' => 'Example message 1',
+            'field_2' => ['Example message 2', 'Example message 3'],
+        ])));
+
+        $view = $this->blade('<x-flash::errors :format="$format"/>', [
+            'format' => ':key: :message',
+        ]);
+
+        $view
+            ->assertSee('role="alert"', false)
+            ->assertSee('field_1: Example message 1')
+            ->assertSee('field_2: Example message 2')
+            ->assertSee('field_2: Example message 3');
+    }
 }

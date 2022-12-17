@@ -10,21 +10,11 @@ class Errors extends Component
     public function __construct(
         public string $title = '',
         public string $text = '',
-        public ?array $messages = null,
         public array $links = [],
-        public string $bag = 'default'
+        public string $bag = 'default',
+        public ?string $format = null,
     ) {
         //
-    }
-
-    public function hasMessages(): bool
-    {
-        return $this->messages !== null;
-    }
-
-    public function messageBag(): \Illuminate\Contracts\Support\MessageBag
-    {
-        return new MessageBag($this->messages);
     }
 
     public function render()

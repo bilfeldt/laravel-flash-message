@@ -1,9 +1,9 @@
-@if($hasMessages() || $errors)
+@if ($errors->getBag($bag)->any())
     <x-flash::alert
         :level="\Bilfeldt\LaravelFlashMessage\Message::LEVEL_ERROR"
         :title="$title"
         :text="$text"
-        :messages="$messages ? $messageBag()->all() : $errors->getBag($bag)->all()"
+        :messages="$errors->getBag($bag)->all($format)"
         :links="$links"
     ></x-flash-alert>
 @endif
