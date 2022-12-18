@@ -19,3 +19,5 @@ to the new namespace syntax
 ```blade
 <x-flash::alert ... /> // new syntax
 ```
+
+The session and view keys are also removed from the configuration, leaving the configuration with using the hardcoded value `messages` for both.
