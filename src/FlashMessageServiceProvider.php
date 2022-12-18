@@ -26,10 +26,6 @@ class FlashMessageServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views' => resource_path('views/vendor/'.self::VIEW_COMPONENT_NAMESPACE),
         ]);
 
-        $this->publishes([
-            __DIR__.'/../config/flash-message.php' => config_path('flash-message.php'),
-        ]);
-
         Blade::componentNamespace('Bilfeldt\\LaravelFlashMessage\\View\\Components', self::VIEW_COMPONENT_NAMESPACE);
 
         // This is used when adding a message from a controller: view('posts-index')->withMessage(...)
