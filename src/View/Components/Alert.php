@@ -26,15 +26,15 @@ class Alert extends Component
     {
         switch ($this->level) {
             case Message::LEVEL_MESSAGE:
-                return view('flash-message::components.alert-message');
+                return view('flash::components.alert-message');
             case Message::LEVEL_INFO:
-                return view('flash-message::components.alert-info');
+                return view('flash::components.alert-info');
             case Message::LEVEL_SUCCESS:
-                return view('flash-message::components.alert-success');
+                return view('flash::components.alert-success');
             case Message::LEVEL_WARNING:
-                return view('flash-message::components.alert-warning');
+                return view('flash::components.alert-warning');
             case Message::LEVEL_ERROR:
-                return view('flash-message::components.alert-error');
+                return view('flash::components.alert-error');
             default:
                 throw new \InvalidArgumentException('Invalid alert level: '.$this->level);
         }

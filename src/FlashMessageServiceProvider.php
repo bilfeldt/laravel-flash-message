@@ -4,51 +4,36 @@ namespace Bilfeldt\LaravelFlashMessage;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\ViewErrorBag;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class FlashMessageServiceProvider extends PackageServiceProvider
+class FlashMessageServiceProvider extends ServiceProvider
 {
     public const VIEW_COMPONENT_NAMESPACE = 'flash';
 
-    public function configurePackage(Package $package): void
+    /**
+     * Bootstrap any package services.
+     *
+     * @return void
+     */
+    public function boot()
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
-        $package
-            ->name('laravel-flash-message')
-            ->hasConfigFile()
-            ->hasViews(); // required for the view component blade files to be registered
-            // The package does not allow for namespaces (`<x-namespace:component />`) but only prefixes (`<x-prefix-component />`
-            // so we register those manually using `componentNamespace()`
-            //->hasViewComponents(
-            //    self::VIEW_COMPONENT_NAMESPACE,
-            //    Messages::class,
-            //    Alert::class,
-            //    AlertError::class,
-            //    AlertInfo::class,
-            //    AlertMessage::class,
-            //    AlertSuccess::class,
-            //    AlertWarning::class
-            //);
-    }
+        $this->loadViewsFrom(__DIR__.'/../resources/views', self::VIEW_COMPONENT_NAMESPACE);
 
-    public function packageBooted()
-    {
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/'.self::VIEW_COMPONENT_NAMESPACE),
+        ]);
+
         Blade::componentNamespace('Bilfeldt\\LaravelFlashMessage\\View\\Components', self::VIEW_COMPONENT_NAMESPACE);
 
         // This is used when adding a message from a controller: view('posts-index')->withMessage(...)
         View::macro('withMessage', function (Message $message, string $bag = 'default'): View {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
-            $viewFlashMessageBag = \Illuminate\Support\Facades\View::shared(config('flash-message.view_share'), new ViewFlashMessageBag());
+            $viewFlashMessageBag = \Illuminate\Support\Facades\View::shared('messages', new ViewFlashMessageBag());
 
-            \Illuminate\Support\Facades\View::share(config('flash-message.view_share'), $viewFlashMessageBag->push($message, $bag));
+            \Illuminate\Support\Facades\View::share('messages', $viewFlashMessageBag->push($message, $bag));
 
             return $this;
         });
@@ -56,9 +41,9 @@ class FlashMessageServiceProvider extends PackageServiceProvider
         // This is used when adding a message from the View Facade: \Illuminate\Support\Facades\View::withMessage(...)
         Factory::macro('withMessage', function (Message $message, string $bag = 'default'): Factory {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
-            $viewFlashMessageBag = \Illuminate\Support\Facades\View::shared(config('flash-message.view_share'), new ViewFlashMessageBag());
+            $viewFlashMessageBag = \Illuminate\Support\Facades\View::shared('messages', new ViewFlashMessageBag());
 
-            \Illuminate\Support\Facades\View::share(config('flash-message.view_share'), $viewFlashMessageBag->push($message, $bag));
+            \Illuminate\Support\Facades\View::share('messages', $viewFlashMessageBag->push($message, $bag));
 
             return $this;
         });
@@ -66,13 +51,13 @@ class FlashMessageServiceProvider extends PackageServiceProvider
         // This is used when adding messages from a controller: view('posts-index')->withMessages(...)
         View::macro('withMessages', function (array $messages, string $bag = 'default'): View {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
-            $viewFlashMessageBag = \Illuminate\Support\Facades\View::shared(config('flash-message.view_share'), new ViewFlashMessageBag());
+            $viewFlashMessageBag = \Illuminate\Support\Facades\View::shared('messages', new ViewFlashMessageBag());
 
             /** @var \Bilfeldt\LaravelFlashMessage\Message $message */
             foreach ($messages as $message) {
                 $viewFlashMessageBag->push($message, $bag);
             }
-            \Illuminate\Support\Facades\View::share(config('flash-message.view_share'), $viewFlashMessageBag);
+            \Illuminate\Support\Facades\View::share('messages', $viewFlashMessageBag);
 
             return $this;
         });
@@ -80,13 +65,13 @@ class FlashMessageServiceProvider extends PackageServiceProvider
         // This is used when adding messages from the View Facade: \Illuminate\Support\Facades\View::withMessages(...)
         Factory::macro('withMessages', function (array $messages, string $bag = 'default'): Factory {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
-            $viewFlashMessageBag = \Illuminate\Support\Facades\View::shared(config('flash-message.view_share'), new ViewFlashMessageBag());
+            $viewFlashMessageBag = \Illuminate\Support\Facades\View::shared('messages', new ViewFlashMessageBag());
 
             /** @var \Bilfeldt\LaravelFlashMessage\Message $message */
             foreach ($messages as $message) {
                 $viewFlashMessageBag->push($message, $bag);
             }
-            \Illuminate\Support\Facades\View::share(config('flash-message.view_share'), $viewFlashMessageBag);
+            \Illuminate\Support\Facades\View::share('messages', $viewFlashMessageBag);
 
             return $this;
         });

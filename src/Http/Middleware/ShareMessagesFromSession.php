@@ -43,7 +43,7 @@ class ShareMessagesFromSession
         // without having to bind. An empty collection is set when there aren't any messages.
         $this->view->share(
             'messages',
-            ViewFlashMessageBag::make($request->session()->get(config('flash-message.session_flash')) ?: [])
+            ViewFlashMessageBag::make($request->session()->get('messages') ?: [])
         );
 
         // Putting the messages in the view for every view allows the developer to just
