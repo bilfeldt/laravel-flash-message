@@ -6,6 +6,6 @@ class AlertSuccess extends AbstractAlert
 {
     public function render()
     {
-        return view('flash-message::components.alert-success');
+        return view('flash::components.alert-success');
     }
 }

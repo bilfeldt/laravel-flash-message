@@ -6,6 +6,6 @@ class AlertInfo extends AbstractAlert
 {
     public function render()
     {
-        return view('flash-message::components.alert-info');
+        return view('flash::components.alert-info');
     }
 }

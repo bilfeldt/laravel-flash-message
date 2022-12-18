@@ -6,6 +6,6 @@ class AlertMessage extends AbstractAlert
 {
     public function render()
     {
-        return view('flash-message::components.alert-message');
+        return view('flash::components.alert-message');
     }
 }

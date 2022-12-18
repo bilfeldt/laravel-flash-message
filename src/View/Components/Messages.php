@@ -15,6 +15,6 @@ class Messages extends Component
 
     public function render()
     {
-        return view('flash-message::components.messages');
+        return view('flash::components.messages');
     }
 }

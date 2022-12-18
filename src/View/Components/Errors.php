@@ -18,6 +18,6 @@ class Errors extends Component
 
     public function render()
     {
-        return view('flash-message::components.errors');
+        return view('flash::components.errors');
     }
 }
