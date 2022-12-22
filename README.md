@@ -65,7 +65,7 @@ Simple usage of the alert blade components (`message`, `info`, `success`, `warni
 Validation errors are made available as `$errors` by default in Laravel and it is possilbe to render these easily using:
 
 ```blade
-<x-flash::error
+<x-flash::errors
     :title="__('Validation errors')"
     :text="__('Please correct the following errors:')"
 />
