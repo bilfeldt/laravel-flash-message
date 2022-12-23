@@ -24,7 +24,7 @@ class FlashMessageServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/'.self::VIEW_COMPONENT_NAMESPACE),
-        ]);
+        ], 'flash-views');
 
         Blade::componentNamespace('Bilfeldt\\LaravelFlashMessage\\View\\Components', self::VIEW_COMPONENT_NAMESPACE);
 
