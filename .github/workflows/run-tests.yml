@@ -48,4 +48,4 @@ jobs:
           composer update --${{ matrix.stability }} --no-interaction
 
       - name: Execute tests
-        run: composer run-script test
+        run: vendor/bin/phpunit
