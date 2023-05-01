@@ -31,22 +31,22 @@ class Message
 
     public static function info(string $text): self
     {
-        return (self::make($text))->level(self::LEVEL_INFO);
+        return self::make($text)->level(self::LEVEL_INFO);
     }
 
     public static function success(string $text): self
     {
-        return (self::make($text))->level(self::LEVEL_SUCCESS);
+        return self::make($text)->level(self::LEVEL_SUCCESS);
     }
 
     public static function warning(string $text): self
     {
-        return (self::make($text))->level(self::LEVEL_WARNING);
+        return self::make($text)->level(self::LEVEL_WARNING);
     }
 
     public static function error(string $text): self
     {
-        return (self::make($text))->level(self::LEVEL_ERROR);
+        return self::make($text)->level(self::LEVEL_ERROR);
     }
 
     public static function make(string $text): self
