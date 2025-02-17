@@ -3,7 +3,7 @@
 ![bilfeldt/laravel-flash-message](/art/banner.png?raw=true)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/bilfeldt/laravel-flash-message.svg?style=flat-square)](https://packagist.org/packages/bilfeldt/laravel-flash-message)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/bilfeldt/laravel-flash-message/run-tests?label=tests)](https://github.com/bilfeldt/laravel-flash-message/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Tests Action Status](https://github.com/bilfeldt/laravel-flash-message/actions/workflows/run-tests.yml/badge.svg)](https://github.com/bilfeldt/laravel-flash-message/actions/workflows/run-tests.yml)
 [![StyleCI Code Style Status](https://github.styleci.io/repos/416473017/shield)](https://github.styleci.io/repos/416473017/shield)
 [![Total Downloads](https://img.shields.io/packagist/dt/bilfeldt/laravel-flash-message.svg?style=flat-square)](https://packagist.org/packages/bilfeldt/laravel-flash-message)
 
