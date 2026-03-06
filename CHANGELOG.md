@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-flash-message` will be documented in this file.
 
+## 1.5.0 - 2026-03-06
+
+- Add Laravel 13 support
+
 ## 1.4.0 - 2025-02-17
 
 - Add Laravel 12 support
